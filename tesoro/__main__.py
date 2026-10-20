@@ -2,6 +2,7 @@
 
 from .juego import Juego
 from .mundo import DIRECCIONES
+from .records import guardar
 
 AYUDA = "Comandos: norte, sur, este, oeste, mirar, explorar, inventario, mapa, descansar, ayuda, salir"
 
@@ -37,6 +38,12 @@ def main():
         else:
             resultado = "Comando desconocido. Escribe ayuda."
         print(resultado)
+    if juego.victoria:
+        try:
+            mejores = guardar(juego.puntos)
+            print("Mejores puntuaciones: " + ", ".join(map(str, mejores)))
+        except OSError:
+            print("No se pudo guardar el record. Tu victoria sigue contando!")
 
 
 if __name__ == "__main__":
